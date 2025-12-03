@@ -609,6 +609,168 @@ make verify-design-tokens URL=http://localhost:5173/page-name
 
 ---
 
+## Generic UIMatch Verification Framework
+
+System weryfikacji UIMatch jest **w pełni generyczny** - działa z dowolnym projektem Figma-to-React.
+
+### Architektura: Generic vs Project-Specific
+
+```
+scripts/                          # GENERYCZNE (reużywalne między projektami)
+└── verify-uimatch.cjs           # Główny skrypt weryfikacji
+
+scripts_[project]/               # SPECYFICZNE dla projektu (np. scripts_gadki/)
+└── uimatch-config.json          # Konfiguracja nodes, aliases, profiles
+
+Makefile                         # GENERYCZNY - wymaga parametru CONFIG
+```
+
+### Makefile (Generyczny)
+
+Makefile **nie zawiera** żadnych ścieżek specyficznych dla projektu. Parametr `CONFIG` jest wymagany:
+
+```bash
+# Lista dostępnych nodes
+make verify-list CONFIG=scripts_gadki/uimatch-config.json
+
+# Weryfikacja node'a
+make verify NODE=hero CONFIG=scripts_gadki/uimatch-config.json
+
+# Z dodatkowymi opcjami
+make verify NODE=mama CONFIG=scripts_gadki/uimatch-config.json PROFILE=component/strict
+make verify NODE=title CONFIG=scripts_gadki/uimatch-config.json URL=http://localhost:3000
+```
+
+### Project Config (`scripts_[project]/uimatch-config.json`)
+
+Każdy projekt ma własny plik konfiguracyjny:
+
+```json
+{
+  "figmaFileKey": "BDWqfvcMQw8RpFhMMMVRa3",
+  "defaultProfile": "component/dev",
+  "defaultUrl": "http://localhost:5173",
+  "outputDir": "tmp/uimatch-reports",
+
+  "nodes": {
+    "hero-bg": {
+      "id": "30-294",
+      "name": "Hero background wave",
+      "selector": "[data-section='hero']",
+      "note": "Only the wave shape, not full hero content"
+    },
+    "title": {
+      "id": "50-64",
+      "name": "GADKI title + subtitle",
+      "selector": "[data-node-id='50:64']"
+    },
+    "avatar-mama": {
+      "id": "2007-220",
+      "name": "Mama avatar",
+      "selector": "[data-node-id='2007:220']",
+      "profile": "component/strict"
+    }
+  },
+
+  "aliases": {
+    "hero": "hero-bg",
+    "mama": "avatar-mama"
+  }
+}
+```
+
+**Pola konfiguracji:**
+
+| Pole | Opis | Wymagane |
+|------|------|----------|
+| `figmaFileKey` | Klucz pliku Figma (z URL) | ✅ |
+| `defaultProfile` | Domyślny profil UIMatch | ❌ (default: `component/dev`) |
+| `defaultUrl` | Domyślny URL aplikacji | ❌ (default: `http://localhost:5173`) |
+| `outputDir` | Katalog na raporty | ❌ (default: `tmp/uimatch-reports`) |
+| `nodes` | Mapa nazwanych node'ów | ✅ |
+| `aliases` | Aliasy dla node'ów | ❌ |
+
+**Struktura node'a:**
+
+| Pole | Opis | Wymagane |
+|------|------|----------|
+| `id` | Node ID z Figma (format: `XX-YY` lub `XX:YY`) | ✅ |
+| `name` | Czytelna nazwa | ✅ |
+| `selector` | CSS selector do capture | ❌ (default: `body`) |
+| `profile` | UIMatch profile dla tego node'a | ❌ |
+| `note` | Notatka/ostrzeżenie | ❌ |
+
+### Generic Script (`scripts/verify-uimatch.cjs`)
+
+Skrypt obsługuje:
+
+```bash
+# Weryfikacja przez nazwę node'a
+node scripts/verify-uimatch.cjs --config=CONFIG hero
+
+# Weryfikacja przez alias
+node scripts/verify-uimatch.cjs --config=CONFIG mama
+
+# Weryfikacja przez bezpośredni Node ID
+node scripts/verify-uimatch.cjs --config=CONFIG 30-294
+
+# Opcje override
+node scripts/verify-uimatch.cjs --config=CONFIG hero --url=http://localhost:3000
+node scripts/verify-uimatch.cjs --config=CONFIG hero --profile=component/strict
+node scripts/verify-uimatch.cjs --config=CONFIG hero --selector="body"
+node scripts/verify-uimatch.cjs --config=CONFIG hero --size=strict
+
+# Lista nodes
+node scripts/verify-uimatch.cjs --config=CONFIG --list
+```
+
+**Opcje:**
+
+| Opcja | Opis | Default |
+|-------|------|---------|
+| `--config=PATH` | Ścieżka do config JSON | **wymagane** |
+| `--url=URL` | Override URL | z config |
+| `--selector=CSS` | Override selector | z node config |
+| `--profile=NAME` | Override profile | z node/config |
+| `--size=MODE` | Size handling: `strict`, `pad`, `crop`, `scale` | `pad` |
+| `--no-text` | Wyłącz porównanie tekstu | `false` |
+| `--list` | Pokaż listę nodes | - |
+
+### Dodawanie Nowego Projektu
+
+1. **Utwórz katalog config:**
+   ```bash
+   mkdir -p scripts_myproject
+   ```
+
+2. **Utwórz config JSON:**
+   ```bash
+   cat > scripts_myproject/uimatch-config.json << 'EOF'
+   {
+     "figmaFileKey": "YOUR_FILE_KEY",
+     "defaultProfile": "component/dev",
+     "defaultUrl": "http://localhost:5173",
+     "outputDir": "tmp/uimatch-reports",
+     "nodes": {
+       "page": {
+         "id": "XX-YY",
+         "name": "Full page",
+         "selector": "body"
+       }
+     },
+     "aliases": {}
+   }
+   EOF
+   ```
+
+3. **Użyj z Makefile:**
+   ```bash
+   make verify-list CONFIG=scripts_myproject/uimatch-config.json
+   make verify NODE=page CONFIG=scripts_myproject/uimatch-config.json
+   ```
+
+---
+
 ## Visual Verification System (UIMatch)
 
 ### Instalacja
