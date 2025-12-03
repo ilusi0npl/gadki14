@@ -1,0 +1,50 @@
+{
+  "figmaFileKey": "BDWqfvcMQw8RpFhMMMVRa3",
+  "figmaNodeId": "21-2",
+  "pageWidth": 1728,
+
+  "sections": {
+    "hero": {
+      "y": 0,
+      "height": 865,
+      "selector": "[data-section='hero']",
+      "note": "Hero section with title, avatars, video thumbnail"
+    },
+    "about": {
+      "y": 865,
+      "height": 700,
+      "selector": "[data-section='about']",
+      "note": "About section - Proste rozmowy na ważne tematy"
+    },
+    "zasady": {
+      "y": 1565,
+      "height": 600,
+      "selector": "[data-section='zasady']",
+      "note": "Zasady section"
+    },
+    "materials": {
+      "y": 2165,
+      "height": 800,
+      "selector": "[data-section='materials']",
+      "note": "Materiały section with cards"
+    },
+    "o-nas": {
+      "y": 2965,
+      "height": 700,
+      "selector": "[data-section='o-nas']",
+      "note": "O nas section"
+    },
+    "faq": {
+      "y": 3665,
+      "height": 500,
+      "selector": "[data-section='faq']",
+      "note": "FAQ section"
+    },
+    "footer": {
+      "y": 4165,
+      "height": 400,
+      "selector": "[data-section='footer']",
+      "note": "Footer section"
+    }
+  }
+}

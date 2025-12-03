@@ -16,6 +16,13 @@
       "selector": "[data-section='hero']",
       "note": "Only the wave shape, not full hero content"
     },
+    "hero-full": {
+      "id": "21-2",
+      "name": "Hero section (cropped from full page)",
+      "selector": "[data-section='hero']",
+      "crop": "0,0,1728,865",
+      "note": "Uses full page screenshot cropped to hero bounds. Adjust crop if needed."
+    },
     "title": {
       "id": "50-64",
       "name": "GADKI title + subtitle",

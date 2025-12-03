@@ -1,7 +1,7 @@
 # UIMatch Visual Verification - Generic Makefile
 # Works with any Figma-to-React project
 
-.PHONY: help verify verify-list screenshot install-uimatch clean
+.PHONY: help verify verify-list verify-sections verify-section screenshot install-uimatch clean
 
 # Configuration (MUST be provided or set via environment)
 CONFIG ?= uimatch-config.json
@@ -15,22 +15,24 @@ PROFILE ?= component/dev
 help:
 	@echo ""
 	@echo "╔══════════════════════════════════════════════════════════════╗"
-	@echo "║            UIMatch Visual Verification                       ║"
+	@echo "║            Figma Visual Verification Tools                   ║"
 	@echo "╠══════════════════════════════════════════════════════════════╣"
-	@echo "║  make verify NODE=x CONFIG=path  - Verify node               ║"
-	@echo "║  make verify-list CONFIG=path    - List available nodes      ║"
+	@echo "║  make verify NODE=x CONFIG=path  - UIMatch single node       ║"
+	@echo "║  make verify-list CONFIG=path    - List UIMatch nodes        ║"
+	@echo "║  make verify-sections            - Compare all sections      ║"
+	@echo "║  make verify-section SECTION=x   - Compare single section    ║"
 	@echo "║  make screenshot                 - Take screenshot           ║"
 	@echo "║  make install-uimatch            - Install dependencies      ║"
 	@echo "║  make clean                      - Clean temporary files     ║"
 	@echo "╚══════════════════════════════════════════════════════════════╝"
 	@echo ""
-	@echo "Required:"
-	@echo "  CONFIG=path/to/config.json  - Project-specific UIMatch config"
-	@echo ""
-	@echo "Examples:"
+	@echo "UIMatch (single node comparison):"
 	@echo "  make verify-list CONFIG=scripts_gadki/uimatch-config.json"
 	@echo "  make verify NODE=hero CONFIG=scripts_gadki/uimatch-config.json"
-	@echo "  make verify NODE=title CONFIG=myproject/config.json PROFILE=component/strict"
+	@echo ""
+	@echo "Sections (full page → crop → compare):"
+	@echo "  make verify-sections SECTIONS_CONFIG=scripts_gadki/sections-config.json"
+	@echo "  make verify-section SECTION=hero SECTIONS_CONFIG=scripts_gadki/sections-config.json"
 	@echo ""
 
 # List all available nodes from config
@@ -57,6 +59,31 @@ endif
 		exit 1; \
 	fi
 	@node scripts/verify-uimatch.cjs --config=$(CONFIG) $(NODE) --url=$(URL) --profile=$(PROFILE)
+
+# Verify all sections (Figma → crop → compare with implementation)
+# Requires SECTIONS_CONFIG parameter
+SECTIONS_CONFIG ?= sections-config.json
+
+verify-sections:
+	@if [ ! -f "$(SECTIONS_CONFIG)" ]; then \
+		echo "❌ Sections config not found: $(SECTIONS_CONFIG)"; \
+		echo "   Usage: make verify-sections SECTIONS_CONFIG=path/to/sections-config.json"; \
+		exit 1; \
+	fi
+	@node scripts/verify-figma-sections.cjs --config=$(SECTIONS_CONFIG) --url=$(URL)
+
+# Verify single section
+verify-section:
+ifndef SECTION
+	@echo "❌ SECTION is required!"
+	@echo "   Usage: make verify-section SECTION=hero SECTIONS_CONFIG=path/to/config.json"
+	@exit 1
+endif
+	@if [ ! -f "$(SECTIONS_CONFIG)" ]; then \
+		echo "❌ Sections config not found: $(SECTIONS_CONFIG)"; \
+		exit 1; \
+	fi
+	@node scripts/verify-figma-sections.cjs --config=$(SECTIONS_CONFIG) --url=$(URL) --section=$(SECTION)
 
 # Take screenshot of current page
 screenshot:
