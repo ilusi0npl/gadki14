@@ -1,0 +1,64 @@
+{
+  "figmaFileKey": "BDWqfvcMQw8RpFhMMMVRa3",
+  "defaultProfile": "component/dev",
+  "defaultUrl": "http://localhost:5173",
+  "outputDir": "tmp/uimatch-reports",
+
+  "nodes": {
+    "page": {
+      "id": "21-2",
+      "name": "Full page (GADKI_strona_główna)",
+      "selector": "body"
+    },
+    "hero-bg": {
+      "id": "30-294",
+      "name": "Hero background wave",
+      "selector": "[data-section='hero']",
+      "note": "Only the wave shape, not full hero content"
+    },
+    "title": {
+      "id": "50-64",
+      "name": "GADKI title + subtitle",
+      "selector": "[data-node-id='50:64']"
+    },
+    "avatar-mama": {
+      "id": "2007-220",
+      "name": "Mama avatar",
+      "selector": "[data-node-id='2007:220']",
+      "profile": "component/strict"
+    },
+    "avatar-tata": {
+      "id": "2007-208",
+      "name": "Tata avatar",
+      "selector": "[data-node-id='2007:208']",
+      "profile": "component/strict"
+    },
+    "avatar-max": {
+      "id": "2007-205",
+      "name": "Max avatar",
+      "selector": "[data-node-id='2007:205']",
+      "profile": "component/strict"
+    },
+    "avatar-gadek": {
+      "id": "2007-212",
+      "name": "Gadek (dog) avatar",
+      "selector": "[data-node-id='2007:212']",
+      "profile": "component/strict"
+    },
+    "avatar-corka": {
+      "id": "2007-224",
+      "name": "Córka avatar",
+      "selector": "[data-node-id='2007:224']",
+      "profile": "component/strict"
+    }
+  },
+
+  "aliases": {
+    "hero": "hero-bg",
+    "mama": "avatar-mama",
+    "tata": "avatar-tata",
+    "max": "avatar-max",
+    "gadek": "avatar-gadek",
+    "corka": "avatar-corka"
+  }
+}

@@ -1,0 +1,32 @@
+@import "tailwindcss";
+
+@theme {
+  --color-raspberry: #E83F4B;
+  --color-beige-100: #F6F5F1;
+  --color-beige-200: #EFEEE8;
+  --color-beige-400: #E0DDD1;
+  --color-gadki-black: #1E1E1E;
+  --font-family-display: 'Fredoka', 'Happy Season', sans-serif;
+  --font-family-body: 'Lato', sans-serif;
+}
+
+@font-face {
+  font-family: 'Happy Season';
+  src: local('Happy Season');
+  font-weight: 600;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Lato';
+  src: local('Lato');
+  font-weight: 400 700;
+  font-style: normal;
+}
+
+body {
+  margin: 0;
+  font-family: 'Lato', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
