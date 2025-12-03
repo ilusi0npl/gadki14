@@ -2,6 +2,8 @@
 
 ## Project Overview
 
+DO NOT COMMIT ANYTHING WITHOUT EXPLICIT ASKED!
+
 **Cel główny**: Generyczny, powtarzalny proces tworzenia pixel-perfect stron React z designów Figma.
 
 **Core**: `.claude/commands/` - komendy definiujące cały workflow:
