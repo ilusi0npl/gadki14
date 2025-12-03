@@ -4,36 +4,23 @@ export default function HeroContent() {
       className="absolute z-20"
       style={{
         position: 'absolute',
-        left: '374px',
+        left: '574px',
         top: '429px',
-        width: '980px',
-        textAlign: 'center',
+        width: '581px',
+        height: '345px',
       }}
       data-node-id="50:64"
     >
       <img
-        src="/assets/gadki-wordmark.svg"
-        alt="GADKI"
+        src="/assets/gadki-wordmark-full.svg"
+        alt="GADKI - Program wzmacniania bezpieczeństwa dzieci"
         style={{
           display: 'block',
-          width: '100%',
-          height: '267px',
-          objectFit: 'contain'
+          width: '581px',
+          height: '345px',
         }}
         data-node-id="30:290"
       />
-      <p
-        className="font-display font-semibold text-white text-center whitespace-nowrap"
-        style={{
-          marginTop: '12px',
-          fontSize: '44px',
-          lineHeight: '1.5',
-          letterSpacing: '-0.484px',
-        }}
-        data-node-id="50:51"
-      >
-        Program wzmacniania bezpieczeństwa dzieci
-      </p>
     </div>
   );
 }
