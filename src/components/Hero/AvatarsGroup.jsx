@@ -7,6 +7,7 @@ const AVATARS = [
     nodeId: '2007:212',
     position: { top: 80, left: 774 },
     imageStyle: { left: '38px', top: '24px', width: '258px', height: '268px' },
+    useContainer: true,
   },
   {
     name: 'Mama',
@@ -56,6 +57,7 @@ export default function AvatarsGroup() {
             alt={avatar.name}
             nodeId={avatar.nodeId}
             imageStyle={avatar.imageStyle}
+            useContainer={avatar.useContainer}
           />
         </div>
       ))}

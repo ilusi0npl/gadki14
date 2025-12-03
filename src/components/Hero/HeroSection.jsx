@@ -2,7 +2,6 @@ import Header from '../Header/Header';
 import HeroBackground from './HeroBackground';
 import HeroContent from './HeroContent';
 import AvatarsGroup from './AvatarsGroup';
-import VideoSection from '../Video/VideoSection';
 
 export default function HeroSection() {
   return (
@@ -10,8 +9,8 @@ export default function HeroSection() {
       className="relative overflow-hidden"
       style={{
         position: 'relative',
-        width: '1750px',
-        height: '1177px',
+        width: '1728px',
+        height: '865px',
         margin: '0 auto',
       }}
       data-section="hero"
@@ -21,7 +20,6 @@ export default function HeroSection() {
       <Header />
       <AvatarsGroup />
       <HeroContent />
-      <VideoSection />
     </section>
   );
 }

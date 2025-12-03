@@ -5,6 +5,7 @@ export default function Avatar({
   imageStyle = {},
   className = '',
   nodeId,
+  useContainer = false,
 }) {
   return (
     <div
@@ -19,18 +20,40 @@ export default function Avatar({
       className={className}
       data-node-id={nodeId}
     >
-      <img
-        src={src}
-        alt={alt}
-        style={{
-          position: 'absolute',
-          objectFit: 'cover',
-          width: imageStyle.width || '100%',
-          height: imageStyle.height || '100%',
-          left: imageStyle.left || 0,
-          top: imageStyle.top || 0,
-        }}
-      />
+      {useContainer ? (
+        <div
+          style={{
+            position: 'absolute',
+            left: imageStyle.left || 0,
+            top: imageStyle.top || 0,
+            width: imageStyle.width || '100%',
+            height: imageStyle.height || '100%',
+          }}
+        >
+          <img
+            src={src}
+            alt={alt}
+            style={{
+              width: '100%',
+              height: '100%',
+              objectFit: 'cover',
+              objectPosition: 'top left',
+            }}
+          />
+        </div>
+      ) : (
+        <img
+          src={src}
+          alt={alt}
+          style={{
+            position: 'absolute',
+            width: imageStyle.width || '100%',
+            height: imageStyle.height || '100%',
+            left: imageStyle.left || 0,
+            top: imageStyle.top || 0,
+          }}
+        />
+      )}
     </div>
   );
 }

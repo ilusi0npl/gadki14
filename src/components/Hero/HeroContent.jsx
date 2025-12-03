@@ -4,9 +4,10 @@ export default function HeroContent() {
       className="absolute z-20"
       style={{
         position: 'absolute',
-        left: '574px',
+        left: '374px',
         top: '429px',
-        width: '580px',
+        width: '980px',
+        textAlign: 'center',
       }}
       data-node-id="50:64"
     >
@@ -22,7 +23,7 @@ export default function HeroContent() {
         data-node-id="30:290"
       />
       <p
-        className="font-display font-semibold text-white text-center"
+        className="font-display font-semibold text-white text-center whitespace-nowrap"
         style={{
           marginTop: '12px',
           fontSize: '44px',
