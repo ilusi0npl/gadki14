@@ -60,8 +60,14 @@
   font-display: swap;
 }
 
-body {
+html, body {
   margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+  background-color: #EFEEE8;
+}
+
+body {
   font-family: 'Lato', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
