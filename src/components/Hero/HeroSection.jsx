@@ -6,7 +6,7 @@ import AvatarsGroup from './AvatarsGroup';
 export default function HeroSection() {
   return (
     <section
-      className="relative overflow-hidden"
+      className="relative overflow-visible"
       style={{
         position: 'relative',
         width: '1728px',

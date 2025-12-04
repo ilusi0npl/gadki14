@@ -3,6 +3,7 @@ export default function HeroBackground() {
     <img
       src="/assets/hero-bg-red-wave.svg"
       alt=""
+      className="z-0"
       style={{
         position: 'absolute',
         top: 0,

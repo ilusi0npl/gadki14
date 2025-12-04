@@ -171,6 +171,61 @@ public/assets/                    # Static assets
 
 ---
 
+## Assets - Pobieranie i Weryfikacja
+
+### Problem: Błędne rozszerzenia plików
+
+Figma czasem eksportuje pliki z błędnym rozszerzeniem (np. SVG jako `.png`). Powoduje to błąd API:
+```
+API Error: 400 "media_type: Input should be 'image/jpeg', 'image/png', 'image/gif' or 'image/webp'"
+```
+
+### PRZED odczytaniem obrazu - ZAWSZE sprawdź typ pliku
+
+```bash
+file public/assets/nazwa-pliku.png
+```
+
+Jeśli wynik to `SVG Scalable Vector Graphics image` - plik ma błędne rozszerzenie.
+
+### Naprawa błędnych rozszerzeń
+
+```bash
+# Zmień rozszerzenie na prawidłowe
+mv public/assets/plik.png public/assets/plik.svg
+
+# Lub sprawdź wszystkie naraz
+for f in public/assets/*.png; do
+  type=$(file -b "$f" | head -c 3)
+  if [ "$type" = "SVG" ]; then
+    echo "FAKE PNG (actually SVG): $f"
+  fi
+done
+```
+
+### Pobieranie assetów z Figma
+
+1. **Użyj `get_design_context`** - zwraca URL-e do pobrania assetów
+2. **Pobierz przez curl/wget** z prawidłowym rozszerzeniem
+3. **Zweryfikuj typ** przed użyciem: `file nazwa-pliku.ext`
+
+### Czytanie plików graficznych
+
+| Typ pliku | Jak czytać |
+|-----------|-----------|
+| PNG/JPG/GIF/WebP (prawdziwe) | `Read` tool - działa |
+| SVG | `Read` tool jako tekst - działa |
+| PNG/JPG (ale faktycznie SVG) | **NIE DZIAŁA** - napraw rozszerzenie |
+
+### Workflow dla nowych assetów
+
+1. Pobierz asset z Figma
+2. `file public/assets/nowy-asset.png` - sprawdź prawdziwy typ
+3. Jeśli typ nie zgadza się z rozszerzeniem → zmień rozszerzenie
+4. Dopiero wtedy używaj w kodzie
+
+---
+
 ## Best Practices
 
 ### Komponenty muszą mieć `data-section`

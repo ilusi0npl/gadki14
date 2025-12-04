@@ -7,42 +7,63 @@
     "hero": {
       "y": 0,
       "height": 865,
+      "nodeId": "30:294",
       "selector": "[data-section='hero']",
-      "note": "Hero section with title, avatars, video thumbnail"
+      "note": "Hero section with title, avatars"
     },
-    "about": {
+    "video": {
       "y": 865,
-      "height": 700,
-      "selector": "[data-section='about']",
-      "note": "About section - Proste rozmowy na ważne tematy"
+      "height": 625,
+      "nodeId": "39:692",
+      "selector": "[data-section='video']",
+      "note": "Video thumbnail section"
+    },
+    "intro": {
+      "y": 1750,
+      "height": 904,
+      "nodeId": "30:302",
+      "selector": "[data-section='intro']",
+      "note": "Intro section - Proste rozmowy na ważne tematy"
     },
     "zasady": {
-      "y": 1565,
-      "height": 600,
+      "y": 2950,
+      "height": 1352,
+      "nodeId": "32:477",
       "selector": "[data-section='zasady']",
       "note": "Zasady section"
     },
-    "materials": {
-      "y": 2165,
-      "height": 800,
-      "selector": "[data-section='materials']",
+    "materialy": {
+      "y": 4703,
+      "height": 909,
+      "nodeId": "39:590",
+      "selector": "[data-section='materialy']",
       "note": "Materiały section with cards"
     },
-    "o-nas": {
-      "y": 2965,
-      "height": 700,
-      "selector": "[data-section='o-nas']",
+    "onas": {
+      "y": 5938,
+      "height": 866,
+      "nodeId": "2009:229",
+      "selector": "[data-section='onas']",
       "note": "O nas section"
     },
     "faq": {
-      "y": 3665,
-      "height": 500,
+      "y": 7124,
+      "height": 772,
+      "nodeId": "43:2593",
       "selector": "[data-section='faq']",
       "note": "FAQ section"
     },
+    "contact": {
+      "y": 8100,
+      "height": 982,
+      "nodeId": "39:594",
+      "selector": "[data-section='contact']",
+      "note": "Contact section with dog decoration"
+    },
     "footer": {
-      "y": 4165,
-      "height": 400,
+      "y": 9082,
+      "height": 485,
+      "nodeId": "2007:1189",
       "selector": "[data-section='footer']",
       "note": "Footer section"
     }
